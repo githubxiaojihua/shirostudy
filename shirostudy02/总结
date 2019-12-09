@@ -1,0 +1,8 @@
+授权认证
+分别自定义了：
+BitPermission对象：用于定义一个全新的授权规则：+资源字符串+权限位+实例ID。可以对比默认的WildPermission规则来理解：资源:权限:实例ID
+BitAndWildPermissionResolver:用于解析字符串规则到Permission实例，这里则根据不同的规则，转换成对应的Permission
+MyRolePermissionResolver:用于根据角色解析权限集合，这里返回的权限集合将会组合到subject原有的权限集合中
+MyRealm:用于进行具体授权，继承AuthorizingRealm，需要实现doGetAuthorizationInfo和doGetAuthenticationInfo
+其中doGetAuthorizationInfo用于返回subject具有的所有role和permissions.而doGetAuthenticationInfo的作用与原来的
+身份认证逻辑一致，登录成功则返回AuthenticationInfo。

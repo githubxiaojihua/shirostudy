@@ -57,4 +57,36 @@ public class C02AuthenticatorTest {
         login("classpath:shiro-authenticator-all-fail.ini");
     }
 
+    /**
+     * 测试自定义strategy（只有一个realm验证成功，才认为成功）
+     * 如果配置的是myRealm1和myRelm4由于其返回的认证身份是一样的因此验证通过
+     * 如果配置的是myRealm1和myRealm3由于其返回的认证身份是2个因此验证不通过报错了
+     */
+    @Test
+    public void testOnlyOneStrategyWithSuccess() {
+        login("classpath:shiro-authenticator-onlyone-success.ini");
+        Subject subject = SecurityUtils.getSubject();
+
+        //得到一个身份集合，因为myRealm1和myRealm4返回的身份一样所以输出时只返回一个
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        junit.framework.Assert.assertEquals(1, principalCollection.asList().size());
+    }
+
+    /**
+     * 测试自定义的atlesttwo策略，由于ini中配置了
+     * myrealm1,myrealm2,myrealm4
+     * 其中myrealm1和myrealm4验证成功，但是由于返回的认证信息是一样的
+     * 被认为是一个，因此没有满足atlisttwo策略，因此抛出了异常
+     * 验证失败。
+     */
+    @Test
+    public void testAtLeastTwoStrategyWithSuccess() {
+        login("classpath:shiro-authenticator-atLeastTwo-success.ini");
+        Subject subject = SecurityUtils.getSubject();
+
+        //得到一个身份集合，因为myRealm1和myRealm4返回的身份一样所以输出时只返回一个
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        junit.framework.Assert.assertEquals(1, principalCollection.asList().size());
+    }
+
 }
