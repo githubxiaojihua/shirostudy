@@ -1,0 +1,6 @@
+了解shiro的编码解码、加密解密
+以及使用加密密码进行authentication登录认证，以前在shirostudy01中的登录认证都是使用的明文。
+有DefaultPasswordService\PasswordMatcher组合进行无盐哈希加密及验证 和
+DefaultPasswordService\HashedCredentialsMatcher组合进行有盐加密
+
+可以参考教程中的顺序图
