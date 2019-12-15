@@ -3,9 +3,9 @@ package com.xiaojihua.realm;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.realm.Realm;
 
-public class MyRealm1 implements Realm {
+public class MyRealm2 implements Realm {
     public String getName() {
-        return "a";
+        return "b";
     }
 
     public boolean supports(AuthenticationToken authenticationToken) {

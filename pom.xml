@@ -13,6 +13,7 @@
         <module>shirostudy03</module>
         <module>shirostudy04</module>
         <module>shirostudy05</module>
+        <module>shirostudy06</module>
     </modules>
     <packaging>pom</packaging>
 
