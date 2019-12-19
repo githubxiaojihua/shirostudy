@@ -23,8 +23,8 @@ public class LoginServlet extends HttpServlet {
 
     protected  void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         //1、获取前台提交的用户名和密码
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter("username1");
+        String password = request.getParameter("password1");
         //2、获取subject，组装token
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);

@@ -42,16 +42,28 @@
 
 
   <!--- shiro 1.2 -->
+  <!--  EnvironmentLoaderListener会实例化一个WebEnvironment实例，此实例包含了在web环境中
+        shiro需要的所有类和方法，包括SecurityManager。
+        shiroFilter将使用WebEnviroment实例进行所有操作
+  -->
   <listener>
     <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
   </listener>
+  <!-- 默认的WebEnvironment是IniWebEnvironment，指的是从ini文件中初始化Shiro
+       可以通过下面的配置来自定义WebEnvironment
+  -->
   <context-param>
     <param-name>shiroEnvironmentClass</param-name>
     <param-value>org.apache.shiro.web.env.IniWebEnvironment</param-value><!-- 默认先从/WEB-INF/shiro.ini，如果没有找classpath:shiro.ini -->
   </context-param>
+  <!-- 指定配置文件的位置 -->
   <context-param>
     <param-name>shiroConfigLocations</param-name>
+    <!-- 加载普通登录登出验证配置文件 -->
     <param-value>classpath:shiro.ini</param-value>
+    <!-- 加载普通登录登出验证配置文件 -->
+    <!--<param-value>classpath:shiro-basicfilterlogin.ini</param-value>-->
+   <!-- <param-value>classpath:shiro-formfilterlogin.ini</param-value>-->
   </context-param>
   <filter>
     <filter-name>shiroFilter</filter-name>

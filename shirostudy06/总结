@@ -1,0 +1,23 @@
+1、在web环境下使用shiro
+   导入依赖
+   在web.xml文件中配置shiro
+   配置ini文件
+   创建LoginServlet以及相关界面
+   使用mvn tomcat7:run运行程序
+   通过http://localhost:8080/shirostudy06/login进行登录测试
+   通过http://localhost:8080/shirostudy06/authenticated显示当前登录的用户，这里有一个问题：
+        当登录成功以后在不关闭浏览器的情况下，在IDEA中关闭tomcat，然后重启后再运行上面的链接仍然能
+        显示登录的用户，这主要有一下原因造成：
+            1、当获取subject的时候shiro会将subject与当前线程进行绑定。
+            2、当tomcat重启的时候实际上只是Tomcat主线程监听的8005端口发送了一个SHUTDOWN字符串，
+               理想情况下主线程结束后守护线程也将结束，但是实际情况是并不会马上结束，tomcat进程还存
+               在jvm中当然tomcat进程中的线程也存在。这样在重新链接上来的时候还是会链接到原来的线程。
+               这一块儿可以参考https://blog.csdn.net/u012599988/article/details/44458083这篇文章。
+        解决方法有：
+            1、关闭浏览器整个窗口，重新请求，这样线程就跟原来的不一样了
+            2、彻底杀掉tomcat进程，然后重启也可以。windows下netstat -ano|findstr 8080查看相关进程然后taskkill /F /PID 2316杀掉
+            linux下直接ps -ef|grep tomcat查找 kill-9就行
+2、基于basic的内置登录shiro-basicfilterlogin.ini
+3、基于表单的过滤器身份验证，走得是authc过滤器，与1中类似只是内部实现了登录（验证）逻辑。
+4、授权（角色和权限）验证。
+

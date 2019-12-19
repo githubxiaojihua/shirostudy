@@ -9,6 +9,9 @@ import org.junit.Test;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * 测试PrincipalColletion的相关API
+ */
 public class C02PricipleCollectionTest extends BaseTest{
 
     @Test

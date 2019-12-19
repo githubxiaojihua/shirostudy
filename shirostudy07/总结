@@ -1,0 +1,4 @@
+1、filter的介绍和使用
+2、扩展OncePerRequestFilter
+
+以上测试可直接运行http://localhost:8080/shirostudy07/，因为配置的是/**=myFilter1,myFilter2,myFilter3[config],myFilter4
