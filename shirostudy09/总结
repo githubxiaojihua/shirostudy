@@ -1,0 +1,7 @@
+1、使用普通的非web的ini文件测试session，相关测试在test包下
+2、分别使用ServletContainerSessionManager和DefaultWebSessionManager进行web环境下的session测试
+   测试方法是运行项目，index.jsp\login.jsp
+   对应C02和C03shiro-web.ini
+3、测试会话监听器，分别监听所有事件或者是针对某一事件进行监听
+   对应C04shiro-web.ini
+
