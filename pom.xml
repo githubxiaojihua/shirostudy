@@ -17,6 +17,7 @@
         <module>shirostudy07</module>
         <module>shirostudy08</module>
         <module>shirostudy09</module>
+        <module>shirostudy10</module>
     </modules>
     <packaging>pom</packaging>
 

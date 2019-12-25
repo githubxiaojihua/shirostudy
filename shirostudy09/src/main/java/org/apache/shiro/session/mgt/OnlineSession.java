@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.xiaojihua.shiro.session;
+package org.apache.shiro.session.mgt;
 
 import org.apache.shiro.session.mgt.SimpleSession;
 
@@ -38,6 +38,10 @@ public class OnlineSession extends SimpleSession {
         }
     }
 
+    /**
+     * 说明bitIndexCounter在父类中是非public的默认是包级别的，如果本类的包与
+     * 父类的包名不一致则会报错，因此需要将本类的包名设置成与父类的包名一致
+     */
     private static final int USER_AGENT_BIT_MASK = 1 << bitIndexCounter++;
     private static final int STATUS_BIT_MASK = 1 << bitIndexCounter++;
 

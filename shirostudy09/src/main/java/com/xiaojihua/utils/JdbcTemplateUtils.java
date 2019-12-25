@@ -1,4 +1,4 @@
-package com.github.zhangkaitao.shiro.chapter10;
+package com.xiaojihua.utils;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +25,7 @@ public class JdbcTemplateUtils {
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/shiro");
         ds.setUsername("root");
-        ds.setPassword("");
+        ds.setPassword("root");
 
         return new JdbcTemplate(ds);
     }

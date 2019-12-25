@@ -1,4 +1,4 @@
-package com.github.zhangkaitao.shiro.chapter10;
+package com.xiaojihua.utils;
 
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.session.Session;

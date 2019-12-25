@@ -1,8 +1,7 @@
-package com.github.zhangkaitao.shiro.chapter10.session.scheduler;
+package com.xiaojihua.session.scheduler;
 
-import com.github.zhangkaitao.shiro.chapter10.JdbcTemplateUtils;
-import com.github.zhangkaitao.shiro.chapter10.SerializableUtils;
-import org.apache.shiro.session.InvalidSessionException;
+import com.xiaojihua.utils.JdbcTemplateUtils;
+import com.xiaojihua.utils.SerializableUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.*;
 import org.slf4j.Logger;
@@ -17,11 +16,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-/**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-9
- * <p>Version: 1.0
- */
+
 public class MySessionValidationScheduler implements SessionValidationScheduler, Runnable {
 
     private JdbcTemplate jdbcTemplate = JdbcTemplateUtils.jdbcTemplate();

@@ -4,4 +4,17 @@
    对应C02和C03shiro-web.ini
 3、测试会话监听器，分别监听所有事件或者是针对某一事件进行监听
    对应C04shiro-web.ini
+4、基于默认EnterpriseCacheSessionDAO实现的SessionDao
+   对应C05shiro-web.ini
+5、基于自定义sessionDao，实现往数据库中持久化session
+   对应C06shiro-web.ini
+
+   如果想要跟踪sessionDAO的执行顺序可以使用C05shiro-web.ini来跟踪，由于会话是由sessionManager创建的，因此
+   找到对应的sessionManager的start方法开始即可，最终向上追溯到AbstractNativeSessionManager的start方法开始
+   流程：首先会创建session，然后调用sessiondao指定sessionid，然后调用对应的cache进行缓存。
+6、会话验证调度器相关，默认调度器和自定义调度器
+   对应C07shiro-web.ini
+7、自定义session以及sessionFactory
+   对应C08shiro-web.ini
+
 
