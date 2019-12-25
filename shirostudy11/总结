@@ -1,3 +1,5 @@
 与spring集成
 
-1、javase环境下的集成
+1、javase环境下的集成。
+   设计spring-beans.xml,spring-shiro.xml,ehcache.xml
+   测试使用ShiroTest
