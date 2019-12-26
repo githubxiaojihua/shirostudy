@@ -27,11 +27,17 @@ public class MySessionDAO extends CachingSessionDAO {
         jdbcTemplate.update(sql, sessionId, SerializableUtils.serialize(session));
         return session.getId();
     }
+
+    /**
+     * 每次刷新页面都会更新session
+     * @param session
+     */
     @Override
     protected void doUpdate(Session session) {
         if(session instanceof ValidatingSession && !((ValidatingSession)session).isValid()) {
             return; //如果会话过期/停止 没必要再更新了
         }
+        System.out.println("每次刷新页面都会更新session");
         String sql = "update sessions set session=? where id=?";
         jdbcTemplate.update(sql, SerializableUtils.serialize(session), session.getId());
     }

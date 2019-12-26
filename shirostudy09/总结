@@ -18,3 +18,32 @@
    对应C08shiro-web.ini
 
 
+说明：这里的login.jsp没有配置action也就是没有后台处理程序，但是提交登录成功以后会自动跳转到项目首页的原因是，login.jsp
+的请求走了默认的authc（FormAuthenticationFilter）过滤器链，而FormAuthenticationFilter里面有个属性是
+successUrl默认是"/"，因此可以直接定位到平台首页。
+
+教程中说：如果是获取会话时验证了会话过期，将抛出InvalidSessionException，因此需要捕获这个异常并跳转到相关页面，提示
+用户会话已经过期为此在web.xml中做了如下设置：
+<error-page>
+    <exception-type>org.apache.shiro.session.InvalidSessionException</exception-type>
+    <location>/invalidSession.jsp</location>
+  </error-page>
+也就是说只有在进行会话验证的时候才会抛出上面的异常，而会话验证一般发生在subject.getSession()的时候，或者调用会话
+验证器的时候才进行验证，本例中的页面提交
+只是牵扯到会话是否过期并不会对会话进行验证，如果过期就重新创建一个会话。想要定位到invalidSession.jsp除非是发送一个
+请求后后台处理时间很长导致了所在session过期后，再调用subjec.getSession才会发生，注意必须是一个请求。
+可以通过打断点的方式在MySessionListener1的onStart停顿很长时间来达到。
+
+关于session验证的官方说明：解释了什么是验证以及为什么要验证
+http://shiro.apache.org/session-management.html#SessionManagement-InvalidSessionDeletion
+Session Validation & Scheduling
+必须对会话进行验证，以便从会话数据存储中删除任何无效(过期或停止)的会话。这确保了数据存储不会随着时间的推移被永远
+不会再次使用的会话填满。
+出于性能原因，只验证会话，以查看它们在访问时是否已经停止或过期(即subject.getSession())。
+这意味着如果没有额外的定期验证，会话孤儿将开始填充会话数据存储。
+说明孤儿的一个常见示例是web浏览器场景:假设一个用户登录到一个web应用程序，创建了一个会话来保留数据
+(身份验证状态、购物车等)。如果用户没有登出并在应用程序不知道的情况下关闭浏览器，他们的会话实际上只是“躺在”
+(孤立的)会话数据存储中。SessionManager无法检测用户是否不再使用他们的浏览器，并且再也不会访问会话(它是孤立的)。
+如果不定期清除会话孤儿，它们将填满会话数据存储(这很糟糕)。因此，为了防止遗孤堆积，
+SessionManager实现支持SessionValidationScheduler的概念。SessionValidationScheduler负责定期验证会话，
+以确保在需要时清理它们。

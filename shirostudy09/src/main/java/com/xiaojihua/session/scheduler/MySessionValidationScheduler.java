@@ -93,6 +93,7 @@ public class MySessionValidationScheduler implements SessionValidationScheduler,
                     ReflectionUtils.invokeMethod(validateMethod, sessionManager, session, new DefaultSessionKey(session.getId()));
                 } catch (Exception e) {
                     //ignore
+
                 }
             }
             start = start + size;
