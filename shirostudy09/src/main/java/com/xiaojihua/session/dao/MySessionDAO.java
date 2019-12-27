@@ -46,8 +46,13 @@ public class MySessionDAO extends CachingSessionDAO {
         String sql = "delete from sessions where id=?";
         jdbcTemplate.update(sql, session.getId());
     }
+
     @Override
     protected Session doReadSession(Serializable sessionId) {
+        /**
+         * 如果请求中带有sessionid的cookie那么就执行此方法到存储处查询session
+         */
+        System.out.println("读取session");
         String sql = "select session from sessions where id=?";
         List<String> sessionStrList = jdbcTemplate.queryForList(sql, String.class, sessionId);
         if(sessionStrList.size() == 0) return null;

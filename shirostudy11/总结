@@ -1,5 +1,25 @@
 与spring集成
 
 1、javase环境下的集成。
-   设计spring-beans.xml,spring-shiro.xml,ehcache.xml
+   涉及spring-beans.xml,spring-shiro.xml,ehcache.xml
    测试使用ShiroTest
+
+2、web环境下的集成
+   涉及web.xml,spring-beans.xml,spring-shiro-web.xml
+   测试直接运行项目，登录用户名是zhang 1231因为在上个tests中将密码改了
+   相当与使用了spring的控制翻转和依赖注入将原来的shiro.ini文件中配置的内容
+   放到了xml格式的spring配置文件中
+
+   这里有个问题需要说明一下：
+   当在web环境下运行项目的时候，当启动服务器以后，第一次运行程序的时候控制台报：There is no session with id [6c004add-c6cf-4411-89b7-7b194da6cb1c]
+   并且随后就Creating new EIS record for new session instance [org.apache.shiro.session.mgt.SimpleSession,id=null]
+   这主要是因为上次登陆平台服务器所（这里应该是shiro的sessionmanager)分配的sessionid被cookie存储在了
+   客户端并且没有过期，但是服务器端由于重启了EHcache缓存中的原本存储的session对象就没有了，因此在进行请求的时候
+   由于都是请求的同一个域名因此会携带上session的cookie，但是服务器根据携带的sessionid使用sessiondao的
+   readSession却在ehcache中找不到对应的session所以会报错，并且生成一个新的sessionid给到客户端。
+
+3、在web环境下集成，使用shiro权限注解，并且使用了spring mvc作为测试框架，但是shiro的权限注解不仅可以放在spirngMVC
+中使用，而且可以在javase环境中使用，并且定义了spring的全局异常处理类DefaultExceptionHandler
+  涉及：web.xml,spring-mvc.xml
+
+  如果密码尝试次数多余5次那么会在前台login页面提示错误，这个是通过默认的authc过滤器抛出的org.apache.shiro.authc.ExcessiveAttemptsException

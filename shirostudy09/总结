@@ -47,3 +47,7 @@ Session Validation & Scheduling
 如果不定期清除会话孤儿，它们将填满会话数据存储(这很糟糕)。因此，为了防止遗孤堆积，
 SessionManager实现支持SessionValidationScheduler的概念。SessionValidationScheduler负责定期验证会话，
 以确保在需要时清理它们。
+
+http协议本身是无状态的，如果需要跟踪客户端的相关信息比如登录信息，购物车信息等，需要借助session机制，session实际上
+就是服务器端的一个对象，用于存储客户端数据。session的实现是依靠cookie机制的，如果客户端禁用cookie则可以使用url重写
+的方式来达到目的。就如本例中的操作可以自定义session。
