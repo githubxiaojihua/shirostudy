@@ -19,6 +19,9 @@
         <module>shirostudy09</module>
         <module>shirostudy10</module>
         <module>shirostudy11</module>
+        <module>shirostudy12</module>
+        <module>shirostudy13</module>
+        <module>shirostudy14-server</module>
     </modules>
     <packaging>pom</packaging>
 

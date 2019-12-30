@@ -1,0 +1,19 @@
+增加对SSL的支持
+1、使用jdk的keytool生成证书
+2、在tomcat的server.xml中进行配置
+    <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+                   maxThreads="150" scheme="https" secure="true"
+                   clientAuth="false" sslProtocol="TLS"
+    			   keystoreFile="D:\localhost.keystore" keystorePass="123456"/>
+    keystoreFile：jdk生成胡证书文件
+    keystorePass: 生成证书时候设置的密码
+3、在spring-shiro-web.xml中进行配置
+使用了上一章的代码。
+涉及:
+tomcat，server.xml，spring-shiro-web.xml
+测试：登录http://localhost:8080/
+     将自动跳转到https://localhost:8443/shirostudy13/login.jsp
+
+不过跳转的时候浏览器会给出一些不安全的提示，这是因为我们使用JDK生成的证书并不是浏览器所认可的，浏览器内部内置了
+CA机构列表，只有这些机构发的证书才不会有风险提示
+具体可以看mybase中shiro部分的《ssl及证书》

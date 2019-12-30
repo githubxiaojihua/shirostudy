@@ -1,0 +1,8 @@
+remember me的使用
+在上一章的基础上增加了rememberMe的功能，rememberMe的主要作用是，关闭浏览器后再打开系统还是能自动登录原来的账号，
+但这只是限于一般的页面，如果是需要authc的页面则会跳到login界面，重新登录才行。
+
+涉及到：
+spring-shiro-web.xml。
+
+没有使用上一章的spring mvc
