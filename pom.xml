@@ -22,6 +22,7 @@
         <module>shirostudy12</module>
         <module>shirostudy13</module>
         <module>shirostudy14-server</module>
+        <module>shirostudy14-client</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,4 +1,27 @@
-1、根据jasig CAS进行单点登录
-此处为Server端，只是根据教程，将jasig CAS的cas-server-webapp项目进行了本地集成（下载下来，改名，
-简单修改)后运行
-https://localhost:8443/server/login?locale=zh_CN
+shiro使用了jasig CAS进行单点登录的支持，jasig CAS分为服务器端和客户端，服务器端进行单点登录，客户端跳转到
+服务器端进行登录验证，流程如下：
+1、当访问客户端需要登录的页面时（http://localhost:8080/client），如果此时还没有登录则自动跳转到单点登录
+服务器进行登录（https://localhost:8443/server/login?service=https://localhost:8443/client/cas）
+后面的service是客户端的CAS服务地址，用于接收并处理登录成功后的Ticket的。
+2、通过服务器提供的登录页面进行登录，服务器负责进行用户名和密码的验证，这里只是写死在了deployerConfigContext.xml
+中了，登录成功后会调用service参数中指定的地址并且携带着一个Ticket。
+3、客户端会接收ticket并且再次交给服务器进行验证是否有效。如果有效则服务器返回用户的身份（principle)
+4、客户端根据身份来获取对应的角色和权限。（shiro有专门的realm进行处理，这里我们新写了一个MyCasRealm extends CasRealm
+继承了CasRealm（shiro提供的与CAS集成的realm）。
+
+测试分为两块：
+shirostudy14-server,shirostudy14-client
+server端是根据教程代码直接重新拷贝过来使用的，通过分析目录结构可以知道教程中的server应用也是直接将jasig CAS
+项目中的cas-server-webapp模块从github下载下来简单的修改运行的。另外需要注意：SERVER端必须使用https协议不然
+无法完成登录验证这是jasig CAS规定的。
+client端是在shirostudy13的基础上进行了改造，原来项目的登录认证功能都没有用但是也保留了，但是使用了原来的
+权限验证机制，主要更改了：
+1、根据原来生成的密钥证书生成公钥，并导入到jdk中。通过JDK的keytool
+2、新导入了shiro-cas依赖
+3、自定义了一个新的realm，MyCasRealm他继承了CasRealm
+4、在spring-shiro-web.xml中对mycasrealm进行了配合
+5、增加了casfilter，并配置
+
+测试的话可以使用
+http://localhost:8080/client------->CAS登录------->成功后跳转到client的index.jsp页面
+
