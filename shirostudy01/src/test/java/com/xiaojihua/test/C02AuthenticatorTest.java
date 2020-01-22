@@ -58,6 +58,35 @@ public class C02AuthenticatorTest {
     }
 
     /**
+     * 测试atleastOneSuccessfulStrategy
+     */
+    @Test
+    public void testAtLeastOneSuccessfulStrategyWithSuccess() {
+        login("classpath:shiro-authenticator-atLeastOne-success.ini");
+        Subject subject = SecurityUtils.getSubject();
+
+        //得到一个身份集合，其包含了Realm验证成功的身份信息
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        junit.framework.Assert.assertEquals(2, principalCollection.asList().size());
+    }
+
+    /**
+     * 测试firstonesuccessfulstrategy
+     * 只要有一个Realm验证成功即可，只返回第一个成功realm返回的认证信息，其他的忽略
+     * FirstSuccessfulStrategy内部的实现实际上就是对merge方法进行的更改，如果已经
+     * 有验证成功的认证信息的直接返回不再合并了。
+     */
+    @Test
+    public void testFirstOneSuccessfulStrategyWithSuccess() {
+        login("classpath:shiro-authenticator-first-success.ini");
+        Subject subject = SecurityUtils.getSubject();
+
+        //得到一个身份集合，其包含了第一个Realm验证成功的身份信息
+        PrincipalCollection principalCollection = subject.getPrincipals();
+        junit.framework.Assert.assertEquals(1, principalCollection.asList().size());
+    }
+
+    /**
      * 测试自定义strategy（只有一个realm验证成功，才认为成功）
      * 如果配置的是myRealm1和myRelm4由于其返回的认证身份是一样的因此验证通过
      * 如果配置的是myRealm1和myRealm3由于其返回的认证身份是2个因此验证不通过报错了

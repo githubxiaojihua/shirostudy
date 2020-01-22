@@ -76,6 +76,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new IncorrectCredentialsException();
         }
         //认证通过返回一个AuthenticationInfo实现
+        //返回SimpleAuthenticationInfo供AuthorizingRealm的getAuthenticationInfo方法使用
         return new SimpleAuthenticationInfo(userName,passWord,getName());
     }
 }
