@@ -3,3 +3,6 @@
   对应shiro.ini
 
 2、session缓存在上一节课已经实现。
+
+本工程中的EhcacheManager类可以删除，因为引用了shiro-cache pom引用，不知道为什么当时留着这个类
+暂时先不删除。

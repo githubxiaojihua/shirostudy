@@ -26,6 +26,7 @@ public class C01CodeAndCryptoTest {
     public void testBase64(){
         String str = "hello";
         String base64Encode = Base64.encodeToString(str.getBytes());
+        System.out.println(base64Encode);
         String str1 = Base64.decodeToString(base64Encode);
         Assert.assertEquals(str,str1);
     }
@@ -37,6 +38,7 @@ public class C01CodeAndCryptoTest {
     public void testHex(){
        String str = "hello";
        String hexEncode = Hex.encodeToString(str.getBytes());
+       System.out.println(hexEncode);
        String str1 = new String(Hex.decode(hexEncode));
        Assert.assertEquals(str,str1);
     }
@@ -63,6 +65,8 @@ public class C01CodeAndCryptoTest {
     public void testRandom(){
 
         SecureRandomNumberGenerator generator = new SecureRandomNumberGenerator();
+        //设置了固定的seed会造成每次生成的nextBytes都是一样的
+        //这个跟Random有点类似
         generator.setSeed("123".getBytes());
         System.out.println(generator.nextBytes().toHex());
     }

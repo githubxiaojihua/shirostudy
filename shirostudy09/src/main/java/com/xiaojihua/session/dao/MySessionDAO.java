@@ -19,6 +19,13 @@ public class MySessionDAO extends CachingSessionDAO {
 
     private JdbcTemplate jdbcTemplate = JdbcTemplateUtils.jdbcTemplate();
 
+
+    /**
+     * 对已经创建好的session分配sessionid
+     * 然后写到数据库中，通过序列化Object
+     * @param session
+     * @return
+     */
     @Override
     protected Serializable doCreate(Session session) {
         Serializable sessionId = generateSessionId(session);
