@@ -77,6 +77,9 @@ public class MyRealm extends AuthorizingRealm {
         }
         //认证通过返回一个AuthenticationInfo实现
         //返回SimpleAuthenticationInfo供AuthorizingRealm的getAuthenticationInfo方法使用
+        //实际上直接使用下面这一句就行了，因为doGetAuthenticationInfo方法的意思是根据principal
+        //获得数据库中的认证信息，供shiro对前台传入的和其进行比较
+        //return new SimpleAuthenticationInfo("zhang","123",getName());
         return new SimpleAuthenticationInfo(userName,passWord,getName());
     }
 }

@@ -23,6 +23,9 @@ public class MyRealm2 extends AuthorizingRealm {
 
     /**
      * 登录认证
+     * 这里设置的用户名、密码以及盐是通过
+     * @see C02PassWordTest testGeneratePassword()
+     * 进行提前计算并复制过来的
      * @param authenticationToken
      * @return
      * @throws AuthenticationException

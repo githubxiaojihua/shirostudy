@@ -5,7 +5,14 @@
 
 
 
-    <!-- 登录记录缓存 锁定10分钟 -->
+    <!-- 登录记录缓存 锁定10分钟
+        maxEntriesLocalHeap：堆内存中能够缓存的对象数量
+        eternal：缓存的对象是否是永不过期
+        timeToIdleSeconds：过期前允许空闲的时间
+        timeToLiveSeconds：缓存数据的生存时间
+        overflowToDisk：内布不足的时候是否启动磁盘缓存
+        statistics：是否开启缓存数据监控和统计
+    -->
     <cache name="passwordRetryCache"
            maxEntriesLocalHeap="2000"
            eternal="false"

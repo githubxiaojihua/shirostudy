@@ -24,6 +24,13 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
     }
 
+    /**
+     * 将登录数据放到ehcache中并设置
+     * timeToIdleSeconds="3600"，相当于锁定一小时
+     * @param token
+     * @param info
+     * @return
+     */
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         String username = (String)token.getPrincipal();

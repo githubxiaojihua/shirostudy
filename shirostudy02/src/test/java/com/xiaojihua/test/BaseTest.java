@@ -12,6 +12,7 @@ import org.junit.After;
 public abstract class BaseTest {
     @After
     public void tearDown() throws Exception {
+        //从threadlocal中删除相应的变量
         ThreadContext.unbindSubject();//退出时请解除绑定Subject到线程 否则对下次测试造成影响
     }
 

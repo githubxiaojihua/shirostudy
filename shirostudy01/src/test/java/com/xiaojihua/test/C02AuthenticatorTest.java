@@ -36,6 +36,7 @@ public class C02AuthenticatorTest {
     @Test
     public void testAllSuccessfulStratgyWithSuccess(){
         this.login("classpath:shiro-authenticator-all-success.ini");
+        //正是因为绑定到了当前线程所以才可以这样获取
         Subject subject = SecurityUtils.getSubject();
         //得到一个身份集合，其包含了Realm验证成功的身份信息，此处为2个一个zhang,一个zhang@163.com
         //如果MyRealm3返回的AuthenticationInfo也是zhang，123，那么principals就只有一个
@@ -49,7 +50,7 @@ public class C02AuthenticatorTest {
      *
      * expected代表这个test应该抛出的异常，如果没有抛出异常或者抛出的异常
      * 不是声明的则认为测试失败。否则就认为test成功
-     * 如果去掉expected则会抛出异常并且测试失败
+     *      * 如果去掉expected则会抛出异常并且测试失败
      */
     @Test(expected = UnknownAccountException.class)
     public void testAllSuccessfulStrategyWithFail() {
