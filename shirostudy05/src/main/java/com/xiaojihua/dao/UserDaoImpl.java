@@ -27,6 +27,7 @@ public class UserDaoImpl implements UserDao {
         final String sql = "insert into sys_users(username, password, salt, locked) values(?,?,?, ?)";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        //使用PreparedStatementCreator创建语句，并将insert的键值放入GeneratedKeyHolder
         jdbcTemplate.update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement psst = connection.prepareStatement(sql, new String[] { "id" });
