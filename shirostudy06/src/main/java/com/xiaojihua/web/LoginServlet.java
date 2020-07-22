@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
         String error = null;
         try{
             subject.login(token);
+            request.setAttribute("subject",subject);
         }catch(UnknownAccountException e){
             error = "用户名或者密码错误！";
         }catch(IncorrectCredentialsException e){

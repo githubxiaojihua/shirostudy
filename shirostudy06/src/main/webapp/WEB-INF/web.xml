@@ -63,7 +63,7 @@
     <param-value>classpath:shiro.ini</param-value>
     <!-- 加载普通登录登出验证配置文件 -->
     <!--<param-value>classpath:shiro-basicfilterlogin.ini</param-value>-->
-   <!-- <param-value>classpath:shiro-formfilterlogin.ini</param-value>-->
+    <!--<param-value>classpath:shiro-formfilterlogin.ini</param-value>-->
   </context-param>
   <filter>
     <filter-name>shiroFilter</filter-name>

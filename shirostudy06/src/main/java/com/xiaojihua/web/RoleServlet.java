@@ -18,6 +18,7 @@ public class RoleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Subject subject = SecurityUtils.getSubject();
         subject.checkRole("admin");
+        req.setAttribute("subject",subject);
         req.getRequestDispatcher("/WEB-INF/jsp/hasRole.jsp").forward(req, resp);
     }
 }
