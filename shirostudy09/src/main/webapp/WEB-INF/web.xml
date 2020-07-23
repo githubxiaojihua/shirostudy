@@ -16,7 +16,7 @@
   </context-param>
   <context-param>
     <param-name>shiroConfigLocations</param-name>
-    <param-value>classpath:C07shiro-web.ini</param-value>
+    <param-value>classpath:C02shiro-web.ini</param-value>
   </context-param>
   <filter>
     <filter-name>shiroFilter</filter-name>
