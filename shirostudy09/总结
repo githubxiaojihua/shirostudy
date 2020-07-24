@@ -8,15 +8,17 @@
    对应C05shiro-web.ini
 5、基于自定义sessionDao，实现往数据库中持久化session
    对应C06shiro-web.ini
-
+   自定义的sessionDao继承了cachingSessionDao,所有在读取时会先查缓存中是否存在，如果找不到才到数据库中查找
    如果想要跟踪sessionDAO的执行顺序可以使用C05shiro-web.ini来跟踪，由于会话是由sessionManager创建的，因此
    找到对应的sessionManager的start方法开始即可，最终向上追溯到AbstractNativeSessionManager的start方法开始
    流程：首先会创建session，然后调用sessiondao指定sessionid，然后调用对应的cache进行缓存。
 6、会话验证调度器相关，默认调度器和自定义调度器
    对应C07shiro-web.ini
+   注意高度器的触发，需要启动程序后进入一下系统。因为进入一下系统才会触发shiro，才会创建相关对象。
 7、自定义session以及sessionFactory
    对应C08shiro-web.ini
 
+Ehcache可以配合TerraCotta实现容器无关的分布式集群
 
 说明：这里的login.jsp没有配置action也就是没有后台处理程序，但是提交登录成功以后会自动跳转到项目首页的原因是，login.jsp
 的请求走了默认的authc（FormAuthenticationFilter）过滤器链，而FormAuthenticationFilter里面有个属性是

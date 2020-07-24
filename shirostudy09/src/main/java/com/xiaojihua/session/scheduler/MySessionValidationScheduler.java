@@ -74,6 +74,7 @@ public class MySessionValidationScheduler implements SessionValidationScheduler,
     }
 
     public void run() {
+        System.out.println("========&&&&&&&&&&&&&");
         if (log.isDebugEnabled()) {
             log.debug("Executing session validation...");
         }
