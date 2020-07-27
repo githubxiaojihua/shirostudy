@@ -18,6 +18,7 @@
     </context:component-scan>
 
     <!-- 开启AOP监听 只对当前配置文件有效 -->
+    <!-- 可以避免spring中方法调用不走代理的情况，具体说明参考笔记中的spring/相关技术文章/AOP中expose-proxy="true"的作用-->
     <aop:aspectj-autoproxy expose-proxy="true"/>
 
 
@@ -56,6 +57,9 @@
 
     </bean>
 
+    <!-- 对原生的datasouce进行代理，使得数据源对上下文的事物敏感，防止数据源连接泄漏
+         也就是对数据源进行spring的事务支持，会根据事物自动调用close方法
+    -->
     <bean id="dataSourceProxy" class="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy">
         <property name="targetDataSource" ref="dataSource"/>
     </bean>

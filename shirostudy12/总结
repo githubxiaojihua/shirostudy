@@ -6,3 +6,7 @@ remember me的使用
 spring-shiro-web.xml。
 
 没有使用上一章的spring mvc
+
+注意：如果要自己做rememberme需要在登录之前这样创建token:
+UsernamePasswordToken(用户名，密码，是否记住我)
+或者也可以参考authc过滤器进行编码
