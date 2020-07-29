@@ -55,7 +55,7 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-
+    <!-- 指定过滤器过滤的请求类型，具体的说明可以看serlet3的chapter1的总结-->
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>

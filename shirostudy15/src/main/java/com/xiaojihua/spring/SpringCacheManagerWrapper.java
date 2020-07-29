@@ -16,6 +16,7 @@ import java.util.*;
 
 /**
  * 包装Spring cache抽象
+ * 本类以Spring cache进行了包装，转换为Shiro的CacheManager
  * <p>User: Zhang Kaitao
  * <p>Date: 13-3-23 上午8:26
  * <p>Version: 1.0

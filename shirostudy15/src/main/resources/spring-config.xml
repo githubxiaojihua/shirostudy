@@ -79,6 +79,7 @@
         </tx:attributes>
     </tx:advice>
 
+    <!-- expose-proxy变量与上文中的作用一致 -->
     <aop:config expose-proxy="true" proxy-target-class="true">
         <!-- 只对业务逻辑层实施事务 -->
         <aop:pointcut id="txPointcut" expression="execution(* com.xiaojihua..service..*+.*(..))"/>

@@ -22,7 +22,7 @@
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-
+    <!-- spring mvc 自定义方法参数解析器 -->
     <mvc:annotation-driven>
         <mvc:argument-resolvers>
             <bean class="com.xiaojihua.web.bind.method.CurrentUserMethodArgumentResolver"/>
@@ -30,6 +30,7 @@
     </mvc:annotation-driven>
 
     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <!-- 使得DispatcherServlet的url-pattern为/是可以处理识别静态资源交给web服务器 -->
     <mvc:default-servlet-handler/>
 
     <!-- 静态资源映射 -->
@@ -45,10 +46,11 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 控制器异常处理 -->
+    <!-- 控制器异常处理 默认mvc:annotation-driven 也会注册，所以这里不写应该也可以（侍验证）-->
     <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
     </bean>
 
+    <!-- 异常全局处理器 -->
     <bean class="com.xiaojihua.web.exception.DefaultExceptionHandler"/>
 
     <import resource="spring-mvc-shiro.xml"/>
