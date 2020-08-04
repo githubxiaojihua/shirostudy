@@ -25,6 +25,7 @@
         <module>shirostudy14-client</module>
         <module>shirostudy15</module>
         <module>shirostudy16</module>
+        <module>shirostudy16-client</module>
     </modules>
     <packaging>pom</packaging>
 
