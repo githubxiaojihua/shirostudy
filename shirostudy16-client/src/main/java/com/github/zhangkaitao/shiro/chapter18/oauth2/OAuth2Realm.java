@@ -59,6 +59,13 @@ public class OAuth2Realm extends AuthorizingRealm {
         return authorizationInfo;
     }
 
+    /**
+     * 使用授权码来获取accesstoken，然后根据accesstoken来获取username
+     * 根据username 和 授权码来构建AuthticationInfo
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         OAuth2Token oAuth2Token = (OAuth2Token) token;
@@ -70,6 +77,11 @@ public class OAuth2Realm extends AuthorizingRealm {
         return authenticationInfo;
     }
 
+    /**
+     * 调用server端的服务换取accesstoken
+     * @param code
+     * @return
+     */
     private String extractUsername(String code) {
 
         try {

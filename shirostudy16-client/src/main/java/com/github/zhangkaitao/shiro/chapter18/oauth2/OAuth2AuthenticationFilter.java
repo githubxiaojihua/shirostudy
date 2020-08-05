@@ -18,6 +18,8 @@ import java.io.IOException;
  * <p>User: Zhang Kaitao
  * <p>Date: 14-2-18
  * <p>Version: 1.0
+ * 类似于FormAuthenticationFilter并参考其实现
+ * isAccessAllowed返回false将所有逻辑放到onAccessDenied中实现
  */
 public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
 
@@ -52,6 +54,13 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
         this.failureUrl = failureUrl;
     }
 
+    /**
+     * 创建自定义的token
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -59,15 +68,29 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
         return new OAuth2Token(code);
     }
 
+    /**
+     * 直接返回false 进入onAccessDenied
+     * @param request
+     * @param response
+     * @param mappedValue
+     * @return
+     */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         return false;
     }
 
+    /**
+     * 登录的具体逻辑
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 
-
+        //如果error等错误信息则进入对应的错误提示页面
         String error = request.getParameter("error");
         String errorDescription = request.getParameter("error_description");
         if(!StringUtils.isEmpty(error)) {//如果服务端返回了错误
@@ -75,15 +98,19 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
             return false;
         }
 
+        //没有登录并且没有授权码则定位到login页面，向服务器请求授权码
         Subject subject = getSubject(request, response);
         if(!subject.isAuthenticated()) {
             if(StringUtils.isEmpty(request.getParameter(authcCodeParam))) {
                 //如果用户没有身份验证，且没有auth code，则重定向到服务端授权
+                //服务器处理完成以后返回的重定向uri与授权码，重定向URI为/oauth2-login
+                //还是会走本过滤器
                 saveRequestAndRedirectToLogin(request, response);
                 return false;
             }
         }
 
+        //没有登录但是有授权码，根据授权码进行登录
         return executeLogin(request, response);
     }
 

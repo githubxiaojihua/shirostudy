@@ -6,6 +6,8 @@ import org.apache.shiro.authc.AuthenticationToken;
  * <p>User: Zhang Kaitao
  * <p>Date: 14-2-18
  * <p>Version: 1.0
+ * 自定义的token类似于UsernamePasswordToken，用于存储oauth2服务器返回的auth code(授权码)
+ *
  */
 public class OAuth2Token implements AuthenticationToken {
 

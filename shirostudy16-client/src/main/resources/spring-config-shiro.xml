@@ -98,6 +98,7 @@
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
+        <!-- 注意这里的loginURL是直接请求的server端的 -->
         <property name="loginUrl" value="http://localhost:8080/chapter16-server/authorize?client_id=c1ebe466-1cdc-4bd3-ab69-77c3561b9dee&amp;response_type=code&amp;redirect_uri=http://localhost:9080/chapter16-client/oauth2-login"/>
         <property name="successUrl" value="/"/>
         <property name="filters">
