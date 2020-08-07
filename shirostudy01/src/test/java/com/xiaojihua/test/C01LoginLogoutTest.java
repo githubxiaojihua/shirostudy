@@ -52,7 +52,7 @@ public class C01LoginLogoutTest {
         SecurityUtils.setSecurityManager(securi);
         //3、获取subject，并且组装token
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken("zhang","12223");
+        UsernamePasswordToken token = new UsernamePasswordToken("zhang","123");
         //4、登录
         try{
             //最终会调用指定的realm的getAuthenticationInfo方法
