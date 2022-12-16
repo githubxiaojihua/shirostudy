@@ -135,7 +135,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>4.0.0.RELEASE</version>
+            <version>5.2.20.RELEASE</version>
         </dependency>
 
         <!--jackson  json解析工具，jackson，是springmvc默认的
